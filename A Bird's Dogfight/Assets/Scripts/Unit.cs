@@ -7,6 +7,9 @@ public class Unit : MonoBehaviour
 
     public string unitName;
 
+    public int wingattack;
+    public int drillpeck;
+
     public int damage;
 
     public int maxHP;

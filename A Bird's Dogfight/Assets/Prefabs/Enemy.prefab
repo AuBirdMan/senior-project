@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Pina
-  damage: 1
+  wingattack: 0
+  drillpeck: 0
+  damage: 8
   maxHP: 20
   currentHP: 20

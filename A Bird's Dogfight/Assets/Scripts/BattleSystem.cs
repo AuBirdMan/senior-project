@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST}
+public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST, PLAYERATTACKED}
 
 public class BattleSystem : MonoBehaviour
 {
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
+
+    public GameObject CombatButtons;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -44,6 +46,8 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
+        CombatButtons.SetActive(false);
+
         yield return new WaitForSeconds(2f);
 
         state = BattleState.PLAYERTURN;
@@ -52,40 +56,42 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        bool isDead = enemyUnit.TakeDamage(playerUnit.wingattack);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "Your wings smash right into the enemy!";
-        
-        yield return new WaitForSeconds(2f);
 
         if(isDead)
         {
             state = BattleState.WON;
+            enemyHUD.SetHP(enemyUnit.currentHP = 0);
             EndBattle();
         } else
             {
                 state = BattleState.ENEMYTURN;
+                enemyHUD.SetHP(enemyUnit.currentHP);
+                yield return new WaitForSeconds(2f);
                 StartCoroutine(EnemyTurn());
             }
     }
 
     IEnumerator PlayerAttack2()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        bool isDead = enemyUnit.TakeDamage(playerUnit.drillpeck);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "Your beak drills into enemy!";
         
-        yield return new WaitForSeconds(2f);
-
         if(isDead)
         {
             state = BattleState.WON;
+            enemyHUD.SetHP(enemyUnit.currentHP = 0);
             EndBattle();
         } else
             {
                 state = BattleState.ENEMYTURN;
+                enemyHUD.SetHP(enemyUnit.currentHP);
+                yield return new WaitForSeconds(2f);
                 StartCoroutine(EnemyTurn());
             }
     }
@@ -103,6 +109,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        CombatButtons.SetActive(false);
+        
         dialogueText.text = enemyUnit.unitName + " digs her fangs into you!";
 
         yield return new WaitForSeconds(1f);
@@ -127,6 +135,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        CombatButtons.SetActive(true);
         dialogueText.text = "Choose an action:";
     }
 

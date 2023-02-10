@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Aster
+  wingattack: 5
+  drillpeck: 10
   damage: 5
   maxHP: 20
   currentHP: 20
