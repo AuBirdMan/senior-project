@@ -70,6 +70,26 @@ public class BattleSystem : MonoBehaviour
             }
     }
 
+    IEnumerator PlayerAttack2()
+    {
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogueText.text = "Your beak drills into enemy!";
+        
+        yield return new WaitForSeconds(2f);
+
+        if(isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        } else
+            {
+                state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
+    }
+
     void EndBattle()
     {
         if(state == BattleState.WON)
@@ -110,12 +130,21 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = "Choose an action:";
     }
 
-    public void OnAttackButton()
+    public void OnWingAttackButton()
     {
         if (state != BattleState.PLAYERTURN)
         return;
 
         StartCoroutine(PlayerAttack());
     }
+
+    public void OnDrillPeckButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        return;
+
+        StartCoroutine(PlayerAttack2());
+    }
+
 
 }
