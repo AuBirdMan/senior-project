@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 314740957013166643}
   - component: {fileID: 314740957013166640}
   - component: {fileID: 314740957013166641}
+  - component: {fileID: 749648918445260954}
+  - component: {fileID: -1046413981797139696}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,3 +105,38 @@ MonoBehaviour:
   damage: 5
   maxHP: 20
   currentHP: 20
+--- !u!95 &749648918445260954
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314740957013166542}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 684630324caf5fa40a63a9aecee0642a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &-1046413981797139696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314740957013166542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b0b71bdd118e9469217d03aa69ccd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 15
+  amplitude: 0.1
+  frequency: 1
