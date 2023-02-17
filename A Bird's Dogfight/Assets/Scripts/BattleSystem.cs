@@ -45,6 +45,9 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
+        playerUnit.criticalChance = 30;
+        enemyUnit.criticalChance = 30;
+
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
 
         playerHUD.SetHUD(playerUnit);
@@ -63,8 +66,10 @@ public class BattleSystem : MonoBehaviour
 
    IEnumerator PlayerAttack()
 {
+    Debug.Log("Player critical chance: " + playerUnit.criticalChance);
     // Calculate whether the player's attack is a critical hit
     bool isCriticalHit = UnityEngine.Random.value <= playerUnit.criticalChance;
+    Debug.Log("isCriticalHit: " + isCriticalHit);
 
         if(buff == true)
         {

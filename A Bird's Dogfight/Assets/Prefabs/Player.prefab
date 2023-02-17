@@ -105,6 +105,7 @@ MonoBehaviour:
   damage: 5
   maxHP: 20
   currentHP: 20
+  criticalChance: 100
 --- !u!95 &749648918445260954
 Animator:
   serializedVersion: 5

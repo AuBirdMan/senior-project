@@ -16,16 +16,20 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
-    public float criticalChance = 10.0f;
+    public int criticalChance;
     
     public bool TakeDamage(int dmg, bool criticalHit) {
         {
+            Debug.Log("criticalChance: " + criticalChance);
             int random = UnityEngine.Random.Range(0, 101);
+            Debug.Log("Random number: " + random);
 
             if (random < criticalChance)
 
             {
                 currentHP -= dmg*2;
+
+                Debug.Log("Damage dealt: " + dmg);
 
                 if(currentHP <= 0)
                     return true;
