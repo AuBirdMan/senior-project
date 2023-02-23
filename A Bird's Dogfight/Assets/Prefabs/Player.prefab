@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314740957013166542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.61, y: -1.04, z: 0}
+  m_LocalPosition: {x: -4.6, y: -1.8, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -102,10 +102,12 @@ MonoBehaviour:
   unitName: Aster
   wingattack: 5
   drillpeck: 10
-  damage: 5
-  maxHP: 20
-  currentHP: 20
-  criticalChance: 100
+  bite: 0
+  headbutt: 0
+  maxHP: 80
+  currentHP: 80
+  criticalChance: 0.2
+  missChance: 0
 --- !u!95 &749648918445260954
 Animator:
   serializedVersion: 5

@@ -10,43 +10,28 @@ public class Unit : MonoBehaviour
 
     public int wingattack;
     public int drillpeck;
-
-    public int damage;
+    public int bite;
+    public int headbutt;
 
     public int maxHP;
     public int currentHP;
 
-    public int criticalChance;
+    public float criticalChance;
+    public float missChance;
     
-    public bool TakeDamage(int dmg, bool criticalHit) {
+    public bool TakeDamage(int dmg, bool criticalHit, bool missHit) {
         {
-            Debug.Log("criticalChance: " + criticalChance);
-            int random = UnityEngine.Random.Range(0, 101);
-            Debug.Log("Random number: " + random);
-
-            if (random < criticalChance)
-
-            {
-                currentHP -= dmg*2;
-
-                Debug.Log("Damage dealt: " + dmg);
+            currentHP -= dmg;
 
                 if(currentHP <= 0)
                     return true;
-                else
+                    else
                     return false;
-            } else {
-                currentHP -= dmg;
 
-                if(currentHP <= 0)
-                    return true;
-                else
-                    return false;
-            }
         }
     }
 
-    public bool TakeExtraDamage(int dmg, bool criticalHit) {
+    public bool TakeExtraDamage(int dmg, bool criticalHit, bool missHit) {
         {
             currentHP -= dmg*2;
 

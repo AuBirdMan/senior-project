@@ -9,4 +9,9 @@ public class SceneChangeonButton : MonoBehaviour
     {
         SceneManager.LoadScene("Battle");
     }
+
+    public void OnClick2()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }

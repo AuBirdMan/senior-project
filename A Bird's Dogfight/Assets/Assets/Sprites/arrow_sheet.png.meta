@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a5c3321e5830f43488c0e6aee779cf9a
+guid: 6a1bd5abcb20118499afc24e649c6da5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,547 +105,421 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dog_medium_0
+      name: arrow_sheet_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 190
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 63
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fc7870287078384fb9ef5ae0b216667
-      internalID: -1146656362
+      spriteID: f7458b1e6474caf4f86946a144d9263a
+      internalID: 460067938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_1
+      name: arrow_sheet_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 190
-        width: 46
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 84
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3441696fbdb54a4497b8f3b3898e14e
-      internalID: 1382514631
+      spriteID: 5d3f4af6cde5320439ac8946f690efce
+      internalID: -317244003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_2
+      name: arrow_sheet_2
       rect:
         serializedVersion: 2
-        x: 124
-        y: 190
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 28
+        y: 84
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ecbcab3238ca6b4995b476c16e83dbb
-      internalID: 839563676
+      spriteID: e481089d5f4f2c5408fc2373a5bfc2a9
+      internalID: 169278497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_3
+      name: arrow_sheet_3
       rect:
         serializedVersion: 2
-        x: 184
-        y: 190
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 28
+        y: 63
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b3e89278291160458a9a9374bb486db
-      internalID: 93428715
+      spriteID: 3e56a8b2cb794714ea75a9d2947e05c4
+      internalID: 1793303252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_4
+      name: arrow_sheet_4
       rect:
         serializedVersion: 2
-        x: 3
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 56
+        y: 63
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c3c4c6d7f72a1d49a182439158da8a2
-      internalID: -886171974
+      spriteID: 7845e2ee158633a4fb561add0fcbb38c
+      internalID: 449756009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_5
+      name: arrow_sheet_5
       rect:
         serializedVersion: 2
-        x: 63
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 56
+        y: 84
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2786d84800b73ea469e4d3fc58bb4efd
-      internalID: 579872065
+      spriteID: 765d4a2912d0cf94c99735ab770ce363
+      internalID: 1607360129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_6
+      name: arrow_sheet_6
       rect:
         serializedVersion: 2
-        x: 123
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 84
+        y: 84
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d41265fe3a4f4c4ea16210150a5da62
-      internalID: -1541818339
+      spriteID: 61796af95795fb24e98076037c3d255f
+      internalID: -1178497030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_7
+      name: arrow_sheet_7
       rect:
         serializedVersion: 2
-        x: 183
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 84
+        y: 63
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 694cfb4298302fb4baa796eadcc98566
-      internalID: -1401650995
+      spriteID: 40687ac62e89b8d48a2fedee772cb79b
+      internalID: -999897719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_8
+      name: arrow_sheet_9
       rect:
         serializedVersion: 2
-        x: 243
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 42
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b0ebf8b2002bcc449c5babbb92f3e2c
-      internalID: 1181052963
+      spriteID: 0735db09b9c9ec04aa387149999f9f50
+      internalID: -499583656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_9
+      name: arrow_sheet_10
       rect:
         serializedVersion: 2
-        x: 303
-        y: 152
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 28
+        y: 42
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d2eaca362e0767458c060ba0d682965
-      internalID: 1999810351
+      spriteID: 40db0ed5e18d3b242bd3c1f555114de7
+      internalID: -1398285051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_10
+      name: arrow_sheet_11
       rect:
         serializedVersion: 2
-        x: 3
-        y: 114
-        width: 49
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 56
+        y: 42
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cfb1bba1c253624e9ecc935c264cb9c
-      internalID: -1525367446
+      spriteID: f3454e4e2a01e1646b402e2d4e256c0d
+      internalID: -1392886389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_11
+      name: arrow_sheet_12
       rect:
         serializedVersion: 2
-        x: 63
-        y: 114
-        width: 49
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 84
+        y: 42
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e264d2559ec848f448350e2fba98bcca
-      internalID: -1589180320
+      spriteID: fb9a8c270b7fc7641abc6c216ddb0e9c
+      internalID: 1168007192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_12
+      name: arrow_sheet_13
       rect:
         serializedVersion: 2
-        x: 123
-        y: 114
-        width: 49
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 21
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85674e57df320c542a456e75d7ae5c10
-      internalID: -794921606
+      spriteID: 13db2be221c875d4fb578448885f19fe
+      internalID: -289514524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_13
+      name: arrow_sheet_14
       rect:
         serializedVersion: 2
-        x: 184
-        y: 114
-        width: 48
-        height: 35
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 28
+        y: 21
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06cea73b215ff104094301bd8b8543cb
-      internalID: -1717119318
+      spriteID: 5ea6054e2d23d88429e365f8bc3ce713
+      internalID: 1487226826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_14
+      name: arrow_sheet_15
       rect:
         serializedVersion: 2
-        x: 244
-        y: 116
-        width: 46
-        height: 34
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 56
+        y: 21
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b074e73b08bb3fb47aca8ce461af5710
-      internalID: -744418046
+      spriteID: caed996124927ae45a8031850903f8d1
+      internalID: -1497930377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_15
+      name: arrow_sheet_16
       rect:
         serializedVersion: 2
-        x: 3
-        y: 76
-        width: 49
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 84
+        y: 21
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bea8f30162d4cd42b21db5d9e29aa1d
-      internalID: 67130937
+      spriteID: 9cb50b4d14211294b8e683b6ffc6c175
+      internalID: -2079023524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_16
+      name: arrow_sheet_17
       rect:
         serializedVersion: 2
-        x: 64
-        y: 76
-        width: 48
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4d51ace5e526184eb02bd9011fb8aed
-      internalID: 801526158
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_17
-      rect:
-        serializedVersion: 2
-        x: 124
-        y: 76
-        width: 44
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d58612768791f8418615b7692f1ba75
-      internalID: -1065505937
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_18
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 38
-        width: 44
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3af0a7daf03f13c47952493966efd593
-      internalID: -1254552235
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_19
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 38
-        width: 45
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bedb2abe8035e2c448be25dc3907c341
-      internalID: -444297440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_20
-      rect:
-        serializedVersion: 2
-        x: 124
-        y: 38
-        width: 44
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6459833304671b747bffd440fcac1ab2
-      internalID: -1896521086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_21
-      rect:
-        serializedVersion: 2
-        x: 184
-        y: 38
-        width: 43
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b25a5199b398c5743b16adbbd44d44a6
-      internalID: -1101998330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dog_medium_22
-      rect:
-        serializedVersion: 2
-        x: 4
+        x: 84
         y: 0
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd1b6aa65fe84504892ef8a8d7e30af3
-      internalID: 914028675
+      spriteID: b1ee6460442db934389c08938f454813
+      internalID: 29495764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_23
+      name: arrow_sheet_18
       rect:
         serializedVersion: 2
-        x: 64
+        x: 56
         y: 0
-        width: 45
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e023ff45468b9a49a5c484d06ad8d58
-      internalID: -1850523538
+      spriteID: 55e3665d6ce30504ab3199c8ef9b01fe
+      internalID: -1716131165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_24
+      name: arrow_sheet_19
       rect:
         serializedVersion: 2
-        x: 124
+        x: 28
         y: 0
-        width: 48
-        height: 31
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd880f207f050b8418ae7d6ae6f9f9e6
-      internalID: 1596520155
+      spriteID: 565b09887d3f26743be7d30bc0aac9b1
+      internalID: -1445422235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dog_medium_25
+      name: arrow_sheet_20
       rect:
         serializedVersion: 2
-        x: 184
+        x: 0
         y: 0
-        width: 48
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04a4c4a212c65c740992a36cbe727b65
-      internalID: -1021172302
+      spriteID: c786bcb80db054b4bac116dcb8271c1f
+      internalID: 1999917200
       vertices: []
       indices: 
       edges: []
@@ -661,32 +535,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      dog_medium_25: -1021172302
-      dog_medium_23: -1850523538
-      dog_medium_2: 839563676
-      dog_medium_12: -794921606
-      dog_medium_13: -1717119318
-      dog_medium_14: -744418046
-      dog_medium_1: 1382514631
-      dog_medium_8: 1181052963
-      dog_medium_18: -1254552235
-      dog_medium_24: 1596520155
-      dog_medium_17: -1065505937
-      dog_medium_9: 1999810351
-      dog_medium_11: -1589180320
-      dog_medium_19: -444297440
-      dog_medium_0: -1146656362
-      dog_medium_4: -886171974
-      dog_medium_20: -1896521086
-      dog_medium_5: 579872065
-      dog_medium_3: 93428715
-      dog_medium_16: 801526158
-      dog_medium_22: 914028675
-      dog_medium_6: -1541818339
-      dog_medium_7: -1401650995
-      dog_medium_10: -1525367446
-      dog_medium_21: -1101998330
-      dog_medium_15: 67130937
+      arrow_sheet_3: 1793303252
+      arrow_sheet_7: -999897719
+      arrow_sheet_14: 1487226826
+      arrow_sheet_19: -1445422235
+      arrow_sheet_20: 1999917200
+      arrow_sheet_16: -2079023524
+      arrow_sheet_9: -499583656
+      arrow_sheet_18: -1716131165
+      arrow_sheet_2: 169278497
+      arrow_sheet_5: 1607360129
+      arrow_sheet_12: 1168007192
+      arrow_sheet_11: -1392886389
+      arrow_sheet_6: -1178497030
+      arrow_sheet_17: 29495764
+      arrow_sheet_0: 460067938
+      arrow_sheet_15: -1497930377
+      arrow_sheet_13: -289514524
+      arrow_sheet_1: -317244003
+      arrow_sheet_4: 449756009
+      arrow_sheet_8: -1919546968
+      arrow_sheet_10: -1398285051
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

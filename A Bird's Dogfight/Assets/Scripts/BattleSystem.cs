@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST, PLAYERATTACKED}
 
@@ -13,6 +14,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyPrefab;
 
     public GameObject CombatButtons;
+    public GameObject PlayerArrow;
+    public GameObject EnemyArrow;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -48,12 +51,17 @@ public class BattleSystem : MonoBehaviour
         playerUnit.criticalChance = 30;
         enemyUnit.criticalChance = 30;
 
+        playerUnit.missChance = 20;
+        enemyUnit.missChance = 20;
+
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
 
         CombatButtons.SetActive(false);
+        PlayerArrow.SetActive(false);
+        EnemyArrow.SetActive(false);
 
         defend = false;
         buff = false;
@@ -67,22 +75,53 @@ public class BattleSystem : MonoBehaviour
    IEnumerator PlayerAttack()
 {
     Debug.Log("Player critical chance: " + playerUnit.criticalChance);
-    // Calculate whether the player's attack is a critical hit
-    bool isCriticalHit = UnityEngine.Random.value <= playerUnit.criticalChance;
+
+    // Calculate critical hit chance
+    float playerCriticalChance = playerUnit.criticalChance / 100f;
+
+    // Calculate miss hit chance
+    float playerMissChance = playerUnit.missChance / 100f;
+
+    // Generate random number for critical hit chance
+    float randomValue = UnityEngine.Random.value;
+
+    // Generate random number for miss hit chance
+    float randomValue2 = UnityEngine.Random.value;
+
+    // Determine whether attack is a critical hit
+    bool isCriticalHit = randomValue <= playerCriticalChance;
+
+    // Determine whether attack is a miss hit
+    bool isMissHit = randomValue2 <= playerMissChance;
+
     Debug.Log("isCriticalHit: " + isCriticalHit);
 
-        if(buff == true)
+        if(isMissHit ==true) {
+            {
+                    dialogueText.text = "You missed!";
+                    yield return new WaitForSeconds(1f);
+
+                    state = BattleState.ENEMYTURN;
+                    enemyHUD.SetHP(enemyUnit.currentHP);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(EnemyTurn());
+            }
+        }else if(buff == true || isCriticalHit == true)
         {
-            bool isDead = enemyUnit.TakeExtraDamage(playerUnit.wingattack, isCriticalHit);
+            dialogueText.text = isCriticalHit ? "Critical hit! Your wings smash right into the enemy!" :  "Your strengthened wings smash right into the enemy!";
+            
+            bool isDead = enemyUnit.TakeExtraDamage(playerUnit.wingattack, isCriticalHit, isMissHit);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
-            dialogueText.text = "Your strengthened wings smash right into the enemy!";
+            yield return new WaitForSeconds(1f);
             
             if(isDead)
             {
                 state = BattleState.WON;
                 enemyHUD.SetHP(enemyUnit.currentHP = 0);
                 EndBattle();
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("You Win!");
             } else
                 {
                     state = BattleState.ENEMYTURN;
@@ -91,16 +130,21 @@ public class BattleSystem : MonoBehaviour
                     StartCoroutine(EnemyTurn());
                 }
         } else {
-            bool isDead = enemyUnit.TakeDamage(playerUnit.wingattack, isCriticalHit);
+            
+            dialogueText.text = "Your wings smash right into the enemy!";
+            
+            bool isDead = enemyUnit.TakeDamage(playerUnit.wingattack, isCriticalHit, isMissHit);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
-            dialogueText.text = isCriticalHit ? "Critical hit! Your wings smash right into the enemy!" : "Your wings smash right into the enemy!";
-            
+            yield return new WaitForSeconds(1f);
+
             if(isDead)
             {
                 state = BattleState.WON;
                 enemyHUD.SetHP(enemyUnit.currentHP = 0);
                 EndBattle();
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("You Win!");
             } else
                 {
                     state = BattleState.ENEMYTURN;
@@ -113,39 +157,73 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack2()
     {
-        // Calculate whether the player's attack is a critical hit
-        bool isCriticalHit = UnityEngine.Random.value <= playerUnit.criticalChance;
+        Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
-            if(buff == true)
+        // Calculate critical hit chance
+        float playerCriticalChance = playerUnit.criticalChance / 100f;
+
+        // Calculate miss hit chance
+        float playerMissChance = playerUnit.missChance / 100f;
+
+        // Generate random number for critical hit chance
+        float randomValue = UnityEngine.Random.value;
+
+        // Generate random number for miss hit chance
+        float randomValue2 = UnityEngine.Random.value;
+
+        // Determine whether attack is a critical hit
+        bool isCriticalHit = randomValue <= playerCriticalChance;
+
+        // Determine whether attack is a miss hit
+        bool isMissHit = randomValue2 <= playerMissChance;
+
+        Debug.Log("isCriticalHit: " + isCriticalHit);
+
+            if(isMissHit ==true) {
+                    dialogueText.text = "You missed!";
+                    yield return new WaitForSeconds(1f);
+
+                    state = BattleState.ENEMYTURN;
+                    enemyHUD.SetHP(enemyUnit.currentHP);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(EnemyTurn());
+            }else if(buff == true || isCriticalHit == true)
             {
-                bool isDead = enemyUnit.TakeExtraDamage(playerUnit.wingattack, isCriticalHit);
+                dialogueText.text = isCriticalHit ? "Critical hit! Your beak drills into enemy!" :  "Your sharpened beak drills into enemy!";
+                
+                bool isDead = enemyUnit.TakeExtraDamage(playerUnit.drillpeck, isCriticalHit, isMissHit);
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
-                dialogueText.text = "Your sharpened beak drills into enemy!";
-                
+                yield return new WaitForSeconds(1f);
+
                 if(isDead)
                 {
                     state = BattleState.WON;
                     enemyHUD.SetHP(enemyUnit.currentHP = 0);
                     EndBattle();
+                    yield return new WaitForSeconds(2f);
+                    SceneManager.LoadScene("You Win!");
                 } else
                     {
                         state = BattleState.ENEMYTURN;
                         enemyHUD.SetHP(enemyUnit.currentHP);
-                        yield return new WaitForSeconds(2f);
+                        yield return new WaitForSeconds(1f);
                         StartCoroutine(EnemyTurn());
                     }
             } else {
-                bool isDead = enemyUnit.TakeDamage(playerUnit.wingattack, isCriticalHit);
+                dialogueText.text = "Your beak drills into enemy!";
+                bool isDead = enemyUnit.TakeDamage(playerUnit.drillpeck, isCriticalHit, isMissHit);
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
-                dialogueText.text = isCriticalHit ? "Critical hit! Your beak drills into enemy!" : "Your beak drills into enemy!";
-                
+                yield return new WaitForSeconds(1f);
+
                 if(isDead)
                 {
                     state = BattleState.WON;
                     enemyHUD.SetHP(enemyUnit.currentHP = 0);
                     EndBattle();
+                    yield return new WaitForSeconds(2f);
+                    SceneManager.LoadScene("You Win!");
                 } else
                     {
                         state = BattleState.ENEMYTURN;
@@ -154,7 +232,7 @@ public class BattleSystem : MonoBehaviour
                         StartCoroutine(EnemyTurn());
                     }
             }
-    }
+}
 
     IEnumerator PlayerDefend()
     {
@@ -196,10 +274,39 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         CombatButtons.SetActive(false);
+        PlayerArrow.SetActive(false);
+        EnemyArrow.SetActive(true);
 
-         bool isCriticalHit = UnityEngine.Random.value <= enemyUnit.criticalChance;
+        Debug.Log("Enemy critical chance: " + enemyUnit.criticalChance);
 
-        if(defend == true)
+        // Calculate critical hit chance
+        float enemyCriticalChance = enemyUnit.criticalChance / 100f;
+
+        // Calculate miss hit chance
+        float enemyMissChance = enemyUnit.missChance / 100f;
+
+        // Generate random number for critical hit chance
+        float randomValue = UnityEngine.Random.value;
+
+        // Generate random number for miss hit chance
+        float randomValue2 = UnityEngine.Random.value;
+
+        // Determine whether attack is a critical hit
+        bool isCriticalHit = randomValue <= enemyCriticalChance;
+
+        // Determine whether attack is a miss hit
+        bool isMissHit = randomValue2 <= enemyMissChance;
+
+        Debug.Log("isCriticalHit: " + isCriticalHit);
+
+        if(isMissHit ==true) {
+            
+                    dialogueText.text = "Pina missed!";
+                    yield return new WaitForSeconds(2f);
+
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+            }else if(defend == true)
         {
             dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
 
@@ -211,24 +318,51 @@ public class BattleSystem : MonoBehaviour
 
             state = BattleState.PLAYERTURN;
             PlayerTurn();
-        } else {
-
+        } else if (isCriticalHit == true)
+        {
             yield return new WaitForSeconds(1f);
 
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage, isCriticalHit);
+            bool isDead = playerUnit.TakeExtraDamage(enemyUnit.bite, isCriticalHit, isMissHit);
 
-            dialogueText.text = isCriticalHit ? "Critical Hit! Pina digs her fangs into you!" : enemyUnit.unitName + " digs her fangs into you!";
+            dialogueText.text = "Critical Hit! Pina digs her fangs into you deeper!";
 
             playerHUD.SetHP(playerUnit.currentHP);
 
             defend = false;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
 
             if(isDead)
             {
                 state = BattleState.LOST;
                 EndBattle();
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("Game Over");
+            }else
+                {
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                }
+        }else {
+
+            yield return new WaitForSeconds(1f);
+
+            bool isDead = playerUnit.TakeDamage(enemyUnit.bite, isCriticalHit, isMissHit);
+
+            dialogueText.text = enemyUnit.unitName + " digs her fangs into you!";
+
+            playerHUD.SetHP(playerUnit.currentHP);
+
+            defend = false;
+
+            yield return new WaitForSeconds(2f);
+
+            if(isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("Game Over");
             }else
                 {
                     state = BattleState.PLAYERTURN;
@@ -240,6 +374,8 @@ public class BattleSystem : MonoBehaviour
     void PlayerTurn()
     {
         CombatButtons.SetActive(true);
+        PlayerArrow.SetActive(true);
+        EnemyArrow.SetActive(false);
         dialogueText.text = "Choose an action:";
     }
 

@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4832715202512182326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.77, y: 0.41, z: 0}
+  m_LocalPosition: {x: 4.77, y: -0.37, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -102,9 +102,12 @@ MonoBehaviour:
   unitName: Pina
   wingattack: 0
   drillpeck: 0
-  damage: 8
-  maxHP: 20
-  currentHP: 20
+  bite: 10
+  headbutt: 0
+  maxHP: 80
+  currentHP: 80
+  criticalChance: 0
+  missChance: 0
 --- !u!95 &7378712427358084721
 Animator:
   serializedVersion: 5
