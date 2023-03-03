@@ -16,6 +16,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject CombatButtons;
     public GameObject PlayerArrow;
     public GameObject EnemyArrow;
+    public GameObject Player;
+    public GameObject Shield;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -27,6 +29,9 @@ public class BattleSystem : MonoBehaviour
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
+
+    GameObject playerGO;
+    GameObject enemyGO;
 
     public BattleState state;
 
@@ -42,10 +47,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
-        GameObject playerGO = Instantiate(playerPrefab);
+        playerGO = Instantiate(playerPrefab);
         playerUnit = playerGO.GetComponent<Unit>();
 
-        GameObject enemyGO = Instantiate(enemyPrefab);
+        enemyGO = Instantiate(enemyPrefab);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         playerUnit.criticalChance = 30;
@@ -74,6 +79,8 @@ public class BattleSystem : MonoBehaviour
 
    IEnumerator PlayerAttack()
 {
+    CombatButtons.SetActive(false);
+    
     Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
     // Calculate critical hit chance
@@ -91,16 +98,19 @@ public class BattleSystem : MonoBehaviour
     // Determine whether attack is a critical hit
     bool isCriticalHit = randomValue <= playerCriticalChance;
 
+    Debug.Log("isCriticalHit: " + isCriticalHit);
+
+    playerGO.GetComponent<Animator>().SetTrigger("isWingAttack");
+    yield return new WaitForSeconds(1f);
+    playerGO.GetComponent<Animator>().SetTrigger("isIdle");
+
     // Determine whether attack is a miss hit
     bool isMissHit = randomValue2 <= playerMissChance;
-
-    Debug.Log("isCriticalHit: " + isCriticalHit);
 
         if(isMissHit ==true) {
             {
                     dialogueText.text = "You missed!";
-                    yield return new WaitForSeconds(1f);
-
+                    
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
                     yield return new WaitForSeconds(1f);
@@ -126,7 +136,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
                     StartCoroutine(EnemyTurn());
                 }
         } else {
@@ -149,7 +159,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
-                    yield return new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(1f);
                     StartCoroutine(EnemyTurn());
                 }
         }
@@ -157,6 +167,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack2()
     {
+        CombatButtons.SetActive(false);
+        
         Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
         // Calculate critical hit chance
@@ -174,6 +186,10 @@ public class BattleSystem : MonoBehaviour
         // Determine whether attack is a critical hit
         bool isCriticalHit = randomValue <= playerCriticalChance;
 
+        playerGO.GetComponent<Animator>().SetTrigger("isDrillPeck");
+        yield return new WaitForSeconds(2f);
+        playerGO.GetComponent<Animator>().SetTrigger("isIdle");
+
         // Determine whether attack is a miss hit
         bool isMissHit = randomValue2 <= playerMissChance;
 
@@ -181,7 +197,6 @@ public class BattleSystem : MonoBehaviour
 
             if(isMissHit ==true) {
                     dialogueText.text = "You missed!";
-                    yield return new WaitForSeconds(1f);
 
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
@@ -228,7 +243,7 @@ public class BattleSystem : MonoBehaviour
                     {
                         state = BattleState.ENEMYTURN;
                         enemyHUD.SetHP(enemyUnit.currentHP);
-                        yield return new WaitForSeconds(2f);
+                        yield return new WaitForSeconds(1f);
                         StartCoroutine(EnemyTurn());
                     }
             }
@@ -236,6 +251,9 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerDefend()
     {
+        CombatButtons.SetActive(false);
+        Shield.SetActive(true);
+        
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You defend!";
         
@@ -249,6 +267,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerBuff()
     {
+        CombatButtons.SetActive(false);
+        
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You power up your next attack!";
 
@@ -273,7 +293,6 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        CombatButtons.SetActive(false);
         PlayerArrow.SetActive(false);
         EnemyArrow.SetActive(true);
 
@@ -293,6 +312,10 @@ public class BattleSystem : MonoBehaviour
 
         // Determine whether attack is a critical hit
         bool isCriticalHit = randomValue <= enemyCriticalChance;
+
+        enemyGO.GetComponent<Animator>().SetTrigger("isBite");
+        yield return new WaitForSeconds(1f);
+        enemyGO.GetComponent<Animator>().SetTrigger("isSit");
 
         // Determine whether attack is a miss hit
         bool isMissHit = randomValue2 <= enemyMissChance;
@@ -331,6 +354,11 @@ public class BattleSystem : MonoBehaviour
             defend = false;
 
             yield return new WaitForSeconds(2f);
+
+            if (playerUnit.currentHP <= 0) {
+            playerGO.GetComponent<Animator>().SetTrigger("isDead");
+            yield return new WaitForSeconds(2f);
+}
 
             if(isDead)
             {
@@ -376,6 +404,7 @@ public class BattleSystem : MonoBehaviour
         CombatButtons.SetActive(true);
         PlayerArrow.SetActive(true);
         EnemyArrow.SetActive(false);
+        Shield.SetActive(false);
         dialogueText.text = "Choose an action:";
     }
 

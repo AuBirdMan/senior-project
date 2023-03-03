@@ -297,10 +297,10 @@ TextureImporter:
       name: bird_v001_blue_and_yellow_9
       rect:
         serializedVersion: 2
-        x: 337
-        y: 192
-        width: 34
-        height: 45
+        x: 346
+        y: 225
+        width: 15
+        height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1532,6 +1532,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bird_v001_blue_and_yellow_68
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 191
+        width: 43
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bd7461202bf5c74f9163a96b5d446da
+      internalID: 1647773250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1600,6 +1621,7 @@ TextureImporter:
       bird_v001_blue_and_yellow_58: 767609701
       bird_v001_blue_and_yellow_55: 1134939946
       bird_v001_blue_and_yellow_24: 1661422750
+      bird_v001_blue_and_yellow_68: 1647773250
       bird_v001_blue_and_yellow_27: 397375533
       bird_v001_blue_and_yellow_44: 1188421997
       bird_v001_blue_and_yellow_12: 1061632628
