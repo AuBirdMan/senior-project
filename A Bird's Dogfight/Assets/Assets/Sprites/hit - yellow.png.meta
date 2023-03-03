@@ -108,10 +108,10 @@ TextureImporter:
       name: hit - yellow_0
       rect:
         serializedVersion: 2
-        x: 2412
-        y: 3438
-        width: 294
-        height: 294
+        x: 2048
+        y: 3072
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: hit - yellow_1
       rect:
         serializedVersion: 2
-        x: 3300
-        y: 3336
-        width: 532
-        height: 478
+        x: 3072
+        y: 3072
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: hit - yellow_2
       rect:
         serializedVersion: 2
-        x: 228
-        y: 2312
-        width: 532
-        height: 478
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: hit - yellow_3
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 2290
-        width: 626
-        height: 536
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: hit - yellow_5
       rect:
         serializedVersion: 2
-        x: 2222
-        y: 2286
-        width: 639
-        height: 546
+        x: 3072
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: hit - yellow_7
       rect:
         serializedVersion: 2
-        x: 3220
-        y: 2263
-        width: 667
-        height: 572
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: hit - yellow_10
       rect:
         serializedVersion: 2
-        x: 162
-        y: 1210
-        width: 665
-        height: 610
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: hit - yellow_12
       rect:
         serializedVersion: 2
-        x: 1188
-        y: 1225
-        width: 667
-        height: 597
+        x: 2048
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -273,13 +273,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_14
+      name: hit - yellow_4
       rect:
         serializedVersion: 2
-        x: 2210
-        y: 1278
-        width: 636
-        height: 542
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9b45d3297c7c6248957ab03df8398a8
-      internalID: -553926141
+      spriteID: 29f703647cf1a7e4ba3df0ab7b68744e
+      internalID: -2090974942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_15
+      name: hit - yellow_6
       rect:
         serializedVersion: 2
-        x: 3225
-        y: 1276
-        width: 647
-        height: 548
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,20 +308,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3f286775b7990d45aaa0f08028ccdc8
-      internalID: -1942408677
+      spriteID: 552b134cac6494242802e4650f7d51a6
+      internalID: 1971302422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_20
+      name: hit - yellow_8
       rect:
         serializedVersion: 2
-        x: 734
-        y: 1490
-        width: 6
-        height: 6
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,20 +329,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc59d094f386584fba157e677495c28
-      internalID: -964034906
+      spriteID: e0317243f1499ac40921ca36d9436a14
+      internalID: 78990449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_26
+      name: hit - yellow_9
       rect:
         serializedVersion: 2
-        x: 152
-        y: 252
-        width: 512
-        height: 550
+        x: 3072
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,20 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 349c34f6aef78e44c902f52d9cb70e88
-      internalID: 2139253880
+      spriteID: 3d2d4fd6cd5cb1c46ada1041f9666792
+      internalID: -563813144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_36
+      name: hit - yellow_11
       rect:
         serializedVersion: 2
-        x: 1172
-        y: 254
-        width: 518
-        height: 540
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -371,20 +371,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4da49725824ce824286b6fca2a946a6a
-      internalID: 1281088964
+      spriteID: e105d6efb3aabd1418c045df40adac5e
+      internalID: 1865751172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: hit - yellow_50
+      name: hit - yellow_13
       rect:
         serializedVersion: 2
-        x: 2194
-        y: 252
-        width: 493
-        height: 542
+        x: 3072
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -392,29 +392,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 795fa92c6dde98d4ea14f0910da45a16
-      internalID: 1222250715
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hit - yellow_52
-      rect:
-        serializedVersion: 2
-        x: 3216
-        y: 252
-        width: 536
-        height: 560
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 96eecb3c144f7454fbf3dd2435d2efad
-      internalID: -851088340
+      spriteID: a40d630114078974ba9add3f3380ba3d
+      internalID: 172953675
       vertices: []
       indices: 
       edges: []
@@ -430,66 +409,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hit - yellow_16: -977014403
-      hit - yellow_21: -2079114787
       hit - yellow_1: 1233743084
-      hit - yellow_18: -1938065401
       hit - yellow_0: 641166056
-      hit - yellow_22: 72455482
-      hit - yellow_33: 569664633
-      hit - yellow_55: 237176829
-      hit - yellow_36: 1281088964
       hit - yellow_11: 1865751172
-      hit - yellow_35: -285556472
-      hit - yellow_47: 1900290520
-      hit - yellow_59: 1525794577
-      hit - yellow_23: -562165001
-      hit - yellow_34: 58503901
-      hit - yellow_32: 922818988
-      hit - yellow_27: 1310878864
-      hit - yellow_43: -1733957952
+      hit - yellow_5: -1147064096
+      hit - yellow_7: -575623600
       hit - yellow_4: -2090974942
-      hit - yellow_17: 21865150
-      hit - yellow_42: -793619248
-      hit - yellow_54: 112277802
-      hit - yellow_24: 921915987
+      hit - yellow_9: -563813144
       hit - yellow_13: 172953675
-      hit - yellow_48: -718234222
-      hit - yellow_58: 1561803143
       hit - yellow_8: 78990449
       hit - yellow_2: 1773078742
-      hit - yellow_37: -652109010
       hit - yellow_3: -96583605
       hit - yellow_6: 1971302422
       hit - yellow_10: -1370720659
-      hit - yellow_19: -1549691267
-      hit - yellow_53: 363220180
       hit - yellow_12: 1213405523
-      hit - yellow_49: 1835830619
-      hit - yellow_56: 600380542
-      hit - yellow_30: -1412888128
-      hit - yellow_31: -834215969
-      hit - yellow_14: -553926141
-      hit - yellow_57: 957847209
-      hit - yellow_25: -2072463869
-      hit - yellow_15: -1942408677
-      hit - yellow_5: -1147064096
-      hit - yellow_46: 637458209
-      hit - yellow_20: -964034906
-      hit - yellow_7: -575623600
-      hit - yellow_29: -1738667869
-      hit - yellow_50: 1222250715
-      hit - yellow_28: -51981521
-      hit - yellow_39: 52150706
-      hit - yellow_9: -563813144
-      hit - yellow_41: -1360177155
-      hit - yellow_51: 1442250129
-      hit - yellow_52: -851088340
-      hit - yellow_40: 190045641
-      hit - yellow_45: 2124350533
-      hit - yellow_38: 329771949
-      hit - yellow_26: 2139253880
-      hit - yellow_44: -1869156939
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

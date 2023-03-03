@@ -32,6 +32,8 @@ public class BattleSystem : MonoBehaviour
 
     GameObject playerGO;
     GameObject enemyGO;
+    GameObject PlayerHit;
+    GameObject EnemyHit;
 
     public BattleState state;
 
@@ -52,6 +54,9 @@ public class BattleSystem : MonoBehaviour
 
         enemyGO = Instantiate(enemyPrefab);
         enemyUnit = enemyGO.GetComponent<Unit>();
+
+        PlayerHit = GameObject.Find("PlayerHit");
+        EnemyHit = GameObject.Find("EnemyHit");
 
         playerUnit.criticalChance = 30;
         enemyUnit.criticalChance = 30;
@@ -101,8 +106,10 @@ public class BattleSystem : MonoBehaviour
     Debug.Log("isCriticalHit: " + isCriticalHit);
 
     playerGO.GetComponent<Animator>().SetTrigger("isWingAttack");
+    PlayerHit.GetComponent<Animator>().SetTrigger("isWing");
     yield return new WaitForSeconds(1f);
     playerGO.GetComponent<Animator>().SetTrigger("isIdle");
+    PlayerHit.GetComponent<Animator>().SetTrigger("isNotWing");
 
     // Determine whether attack is a miss hit
     bool isMissHit = randomValue2 <= playerMissChance;
@@ -187,7 +194,9 @@ public class BattleSystem : MonoBehaviour
         bool isCriticalHit = randomValue <= playerCriticalChance;
 
         playerGO.GetComponent<Animator>().SetTrigger("isDrillPeck");
-        yield return new WaitForSeconds(2f);
+        PlayerHit.GetComponent<Animator>().SetTrigger("isHit");
+        yield return new WaitForSeconds(1f);
+        PlayerHit.GetComponent<Animator>().SetTrigger("isNotHit");
         playerGO.GetComponent<Animator>().SetTrigger("isIdle");
 
         // Determine whether attack is a miss hit
@@ -314,8 +323,10 @@ public class BattleSystem : MonoBehaviour
         bool isCriticalHit = randomValue <= enemyCriticalChance;
 
         enemyGO.GetComponent<Animator>().SetTrigger("isBite");
+        EnemyHit.GetComponent<Animator>().SetTrigger("isBiten");
         yield return new WaitForSeconds(1f);
         enemyGO.GetComponent<Animator>().SetTrigger("isSit");
+        EnemyHit.GetComponent<Animator>().SetTrigger("isNotBiten");
 
         // Determine whether attack is a miss hit
         bool isMissHit = randomValue2 <= enemyMissChance;
