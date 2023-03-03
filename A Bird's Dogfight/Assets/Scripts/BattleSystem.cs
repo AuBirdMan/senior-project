@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject EnemyArrow;
     public GameObject Player;
     public GameObject Shield;
+    public GameObject Aura;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -38,13 +39,18 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
     bool defend;
+    bool playerDefendedLastTurn;
 
     bool buff;
+
+    public Button defendButton;
 
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+
+        defendButton.onClick.AddListener(OnDefend);
     }
 
     IEnumerator SetupBattle()
@@ -61,8 +67,11 @@ public class BattleSystem : MonoBehaviour
         playerUnit.criticalChance = 30;
         enemyUnit.criticalChance = 30;
 
-        playerUnit.missChance = 20;
+        //playerUnit.missChance = 20;
         enemyUnit.missChance = 20;
+
+        playerUnit.wingAttackAccuracy = 100;
+        playerUnit.drillPeckAccuracy = 70;
 
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
 
@@ -74,6 +83,7 @@ public class BattleSystem : MonoBehaviour
         EnemyArrow.SetActive(false);
 
         defend = false;
+        playerDefendedLastTurn = false;
         buff = false;
 
         yield return new WaitForSeconds(2f);
@@ -85,14 +95,12 @@ public class BattleSystem : MonoBehaviour
    IEnumerator PlayerAttack()
 {
     CombatButtons.SetActive(false);
+    playerDefendedLastTurn = false;
     
     Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
     // Calculate critical hit chance
     float playerCriticalChance = playerUnit.criticalChance / 100f;
-
-    // Calculate miss hit chance
-    float playerMissChance = playerUnit.missChance / 100f;
 
     // Generate random number for critical hit chance
     float randomValue = UnityEngine.Random.value;
@@ -112,7 +120,7 @@ public class BattleSystem : MonoBehaviour
     PlayerHit.GetComponent<Animator>().SetTrigger("isNotWing");
 
     // Determine whether attack is a miss hit
-    bool isMissHit = randomValue2 <= playerMissChance;
+    bool isMissHit = randomValue2 <= (100 - playerUnit.wingAttackAccuracy);
 
         if(isMissHit ==true) {
             {
@@ -130,6 +138,7 @@ public class BattleSystem : MonoBehaviour
             bool isDead = enemyUnit.TakeExtraDamage(playerUnit.wingattack, isCriticalHit, isMissHit);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
+            Aura.SetActive(false);
             yield return new WaitForSeconds(1f);
             
             if(isDead)
@@ -175,14 +184,12 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PlayerAttack2()
     {
         CombatButtons.SetActive(false);
+        playerDefendedLastTurn = false;
         
         Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
         // Calculate critical hit chance
         float playerCriticalChance = playerUnit.criticalChance / 100f;
-
-        // Calculate miss hit chance
-        float playerMissChance = playerUnit.missChance / 100f;
 
         // Generate random number for critical hit chance
         float randomValue = UnityEngine.Random.value;
@@ -200,7 +207,7 @@ public class BattleSystem : MonoBehaviour
         playerGO.GetComponent<Animator>().SetTrigger("isIdle");
 
         // Determine whether attack is a miss hit
-        bool isMissHit = randomValue2 <= playerMissChance;
+        bool isMissHit = randomValue2 <= (100 - playerUnit.drillPeckAccuracy) / 100f;
 
         Debug.Log("isCriticalHit: " + isCriticalHit);
 
@@ -218,6 +225,7 @@ public class BattleSystem : MonoBehaviour
                 bool isDead = enemyUnit.TakeExtraDamage(playerUnit.drillpeck, isCriticalHit, isMissHit);
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
+                Aura.SetActive(false);
                 yield return new WaitForSeconds(1f);
 
                 if(isDead)
@@ -260,28 +268,42 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerDefend()
     {
-        CombatButtons.SetActive(false);
-        Shield.SetActive(true);
-        
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = "You defend!";
-        
-        defend = true;
+        if(playerDefendedLastTurn == false)
+        {
+            CombatButtons.SetActive(false);
+            Shield.SetActive(true);
+            
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            dialogueText.text = "You defend and heal up!";
 
-        state = BattleState.ENEMYTURN;
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(EnemyTurn());
+            playerUnit.Heal(5);
+            playerHUD.SetHP(playerUnit.currentHP);
+            
+            defend = true;
+            playerDefendedLastTurn = true;
+
+            state = BattleState.ENEMYTURN;
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            yield return new WaitForSeconds(2f);
+            StartCoroutine(EnemyTurn());
+        } else {
+            dialogueText.text = "Your barrier is recharging!";
+            yield return new WaitForSeconds(2f);
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
     }
 
     IEnumerator PlayerBuff()
     {
         CombatButtons.SetActive(false);
+        Aura.SetActive(true);
         
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You power up your next attack!";
 
         buff = true;
+        playerDefendedLastTurn = false;
         
         state = BattleState.ENEMYTURN;
         enemyHUD.SetHP(enemyUnit.currentHP);
@@ -337,6 +359,7 @@ public class BattleSystem : MonoBehaviour
             
                     dialogueText.text = "Pina missed!";
                     yield return new WaitForSeconds(2f);
+                    defend = false;
 
                     state = BattleState.PLAYERTURN;
                     PlayerTurn();
@@ -416,6 +439,7 @@ public class BattleSystem : MonoBehaviour
         PlayerArrow.SetActive(true);
         EnemyArrow.SetActive(false);
         Shield.SetActive(false);
+
         dialogueText.text = "Choose an action:";
     }
 
@@ -436,12 +460,12 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void OnDefend()
-    {
-        if (state != BattleState.PLAYERTURN)
+{
+    if (state != BattleState.PLAYERTURN)
         return;
 
         StartCoroutine(PlayerDefend());
-    }
+}
 
     public void OnBuff()
     {

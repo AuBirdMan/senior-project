@@ -18,6 +18,9 @@ public class Unit : MonoBehaviour
 
     public float criticalChance;
     public float missChance;
+
+    public int wingAttackAccuracy;
+    public int drillPeckAccuracy;
     
     public bool TakeDamage(int dmg, bool isCriticalHit, bool isMissHit)
 {
@@ -52,25 +55,32 @@ public class Unit : MonoBehaviour
 }
 
     IEnumerator FadeOutSprite()
-{
-    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-
-    // Fade out the sprite over 1 second
-    float elapsedTime = 0f;
-    while (elapsedTime < 1f)
     {
-        // Calculate the alpha value based on the elapsed time
-        float alpha = Mathf.Lerp(1f, 0f, elapsedTime / 1f);
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
-        // Set the sprite's color with the new alpha value
-        Color newColor = renderer.color;
-        newColor.a = alpha;
-        renderer.color = newColor;
+        // Fade out the sprite over 1 second
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            // Calculate the alpha value based on the elapsed time
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / 1f);
 
-        // Increment the elapsed time
-        elapsedTime += Time.deltaTime;
+            // Set the sprite's color with the new alpha value
+            Color newColor = renderer.color;
+            newColor.a = alpha;
+            renderer.color = newColor;
 
-        yield return null;
+            // Increment the elapsed time
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
-}
+
+    public void Heal (int amount)
+    {
+        currentHP += amount;
+        if (currentHP > maxHP)
+            currentHP = maxHP;
+    }
 }
