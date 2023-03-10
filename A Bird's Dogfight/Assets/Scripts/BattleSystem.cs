@@ -16,7 +16,6 @@ public class BattleSystem : MonoBehaviour
     public GameObject CombatButtons;
     public GameObject PlayerArrow;
     public GameObject EnemyArrow;
-    public GameObject Player;
     public GameObject Shield;
     public GameObject Aura;
 
@@ -33,8 +32,8 @@ public class BattleSystem : MonoBehaviour
 
     GameObject playerGO;
     GameObject enemyGO;
-    GameObject PlayerHit;
-    GameObject EnemyHit;
+    public GameObject PlayerHit;
+    public GameObject EnemyHit;
 
     public BattleState state;
 
@@ -45,12 +44,32 @@ public class BattleSystem : MonoBehaviour
 
     public Button defendButton;
 
+    public AudioClip wingflareAudioClip;
+    public AudioClip peckAudioClip;
+    public AudioClip barrierAudioClip;
+    public AudioClip biteAudioClip;
+    public AudioClip shieldhitAudioClip;
+    public AudioClip powerupAudioClip;
+    AudioSource wingflareSound;
+    AudioSource peckSound;
+    AudioSource barrierSound;
+    AudioSource biteSound;
+    AudioSource shieldhitSound;
+    AudioSource powerupSound;
+
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
 
         defendButton.onClick.AddListener(OnDefend);
+
+        wingflareSound = GameObject.Find("wingflaresound").GetComponent<AudioSource>();
+        peckSound = GameObject.Find("pecksound").GetComponent<AudioSource>();
+        barrierSound = GameObject.Find("barriersound").GetComponent<AudioSource>();
+        biteSound = GameObject.Find("bitesound").GetComponent<AudioSource>();
+        shieldhitSound = GameObject.Find("shieldhitsound").GetComponent<AudioSource>();
+        powerupSound = GameObject.Find("powerupsound").GetComponent<AudioSource>();
     }
 
     IEnumerator SetupBattle()
@@ -114,7 +133,13 @@ public class BattleSystem : MonoBehaviour
     Debug.Log("isCriticalHit: " + isCriticalHit);
 
     playerGO.GetComponent<Animator>().SetTrigger("isWingAttack");
+
+    AudioSource wingflareSound = GetComponent<AudioSource>();
+    wingflareSound.clip = wingflareAudioClip;
+    wingflareSound.Play();
+
     PlayerHit.GetComponent<Animator>().SetTrigger("isWing");
+
     yield return new WaitForSeconds(1f);
     playerGO.GetComponent<Animator>().SetTrigger("isIdle");
     PlayerHit.GetComponent<Animator>().SetTrigger("isNotWing");
@@ -200,6 +225,10 @@ public class BattleSystem : MonoBehaviour
         // Determine whether attack is a critical hit
         bool isCriticalHit = randomValue <= playerCriticalChance;
 
+        AudioSource peckSound = GetComponent<AudioSource>();
+        peckSound.clip = peckAudioClip;
+        peckSound.Play();
+
         playerGO.GetComponent<Animator>().SetTrigger("isDrillPeck");
         PlayerHit.GetComponent<Animator>().SetTrigger("isHit");
         yield return new WaitForSeconds(1f);
@@ -276,6 +305,10 @@ public class BattleSystem : MonoBehaviour
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogueText.text = "You defend and heal up!";
 
+            AudioSource barrierSound = GetComponent<AudioSource>();
+            barrierSound.clip = barrierAudioClip;
+            barrierSound.Play();
+
             playerUnit.Heal(5);
             playerHUD.SetHP(playerUnit.currentHP);
             
@@ -298,6 +331,10 @@ public class BattleSystem : MonoBehaviour
     {
         CombatButtons.SetActive(false);
         Aura.SetActive(true);
+
+        AudioSource powerupSound = GetComponent<AudioSource>();
+        powerupSound.clip = powerupAudioClip;
+        powerupSound.Play();
         
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogueText.text = "You power up your next attack!";
@@ -345,6 +382,11 @@ public class BattleSystem : MonoBehaviour
         bool isCriticalHit = randomValue <= enemyCriticalChance;
 
         enemyGO.GetComponent<Animator>().SetTrigger("isBite");
+
+        AudioSource biteSound = GetComponent<AudioSource>();
+        biteSound.clip = biteAudioClip;
+        biteSound.Play();
+
         EnemyHit.GetComponent<Animator>().SetTrigger("isBiten");
         yield return new WaitForSeconds(1f);
         enemyGO.GetComponent<Animator>().SetTrigger("isSit");
@@ -366,6 +408,10 @@ public class BattleSystem : MonoBehaviour
             }else if(defend == true)
         {
             dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
+
+            AudioSource shieldhitSound = GetComponent<AudioSource>();
+            shieldhitSound.clip = shieldhitAudioClip;
+            shieldhitSound.Play();
 
             yield return new WaitForSeconds(1f);
 

@@ -14,4 +14,9 @@ public class SceneChangeonButton : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
 }
