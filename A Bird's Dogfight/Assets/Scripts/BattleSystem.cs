@@ -83,8 +83,8 @@ public class BattleSystem : MonoBehaviour
         PlayerHit = GameObject.Find("PlayerHit");
         EnemyHit = GameObject.Find("EnemyHit");
 
-        playerUnit.criticalChance = 30;
-        enemyUnit.criticalChance = 30;
+        playerUnit.criticalChance = 20;
+        enemyUnit.criticalChance = 20;
 
         //playerUnit.missChance = 20;
         enemyUnit.missChance = 20;
@@ -150,7 +150,7 @@ public class BattleSystem : MonoBehaviour
         if(isMissHit ==true) {
             {
                     dialogueText.text = "You missed!";
-                    
+                    Aura.SetActive(false);
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
                     yield return new WaitForSeconds(1f);
@@ -164,6 +164,7 @@ public class BattleSystem : MonoBehaviour
 
             enemyHUD.SetHP(enemyUnit.currentHP);
             Aura.SetActive(false);
+            buff = false;
             yield return new WaitForSeconds(1f);
             
             if(isDead)
@@ -242,7 +243,7 @@ public class BattleSystem : MonoBehaviour
 
             if(isMissHit ==true) {
                     dialogueText.text = "You missed!";
-
+                    Aura.SetActive(false);
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
                     yield return new WaitForSeconds(1f);
@@ -255,6 +256,7 @@ public class BattleSystem : MonoBehaviour
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
                 Aura.SetActive(false);
+                buff = false;
                 yield return new WaitForSeconds(1f);
 
                 if(isDead)
@@ -309,7 +311,7 @@ public class BattleSystem : MonoBehaviour
             barrierSound.clip = barrierAudioClip;
             barrierSound.Play();
 
-            playerUnit.Heal(5);
+            playerUnit.Heal(6);
             playerHUD.SetHP(playerUnit.currentHP);
             
             defend = true;
