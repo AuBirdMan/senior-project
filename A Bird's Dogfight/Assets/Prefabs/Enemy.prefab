@@ -103,11 +103,13 @@ MonoBehaviour:
   wingattack: 0
   drillpeck: 0
   bite: 10
-  headbutt: 0
+  headbutt: 15
   maxHP: 80
   currentHP: 80
   criticalChance: 0
   missChance: 0
+  wingAttackAccuracy: 0
+  drillPeckAccuracy: 0
 --- !u!95 &7378712427358084721
 Animator:
   serializedVersion: 5

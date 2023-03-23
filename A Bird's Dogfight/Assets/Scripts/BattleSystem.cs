@@ -26,6 +26,7 @@ public class BattleSystem : MonoBehaviour
     Unit enemyUnit;
 
     public TMP_Text dialogueText;
+    public TMP_Text dialogueText2;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
@@ -50,12 +51,14 @@ public class BattleSystem : MonoBehaviour
     public AudioClip biteAudioClip;
     public AudioClip shieldhitAudioClip;
     public AudioClip powerupAudioClip;
+    public AudioClip headbuttAudioClip;
     AudioSource wingflareSound;
     AudioSource peckSound;
     AudioSource barrierSound;
     AudioSource biteSound;
     AudioSource shieldhitSound;
     AudioSource powerupSound;
+    AudioSource headbuttSound;
 
     void Start()
     {
@@ -90,9 +93,10 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.missChance = 20;
 
         playerUnit.wingAttackAccuracy = 100;
-        playerUnit.drillPeckAccuracy = 70;
+        playerUnit.drillPeckAccuracy = 80;
 
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
+        dialogueText2.text = "Critical Hit Check =";
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
@@ -129,6 +133,9 @@ public class BattleSystem : MonoBehaviour
 
     // Determine whether attack is a critical hit
     bool isCriticalHit = randomValue <= playerCriticalChance;
+
+    dialogueText2.text = "Critical Hit Check = " + UnityEngine.Random.value * 100 + " <= 20";
+    Debug.Log("Critical Hit Check = " + UnityEngine.Random.value * 100 + " <= 20");
 
     Debug.Log("isCriticalHit: " + isCriticalHit);
 
@@ -311,7 +318,7 @@ public class BattleSystem : MonoBehaviour
             barrierSound.clip = barrierAudioClip;
             barrierSound.Play();
 
-            playerUnit.Heal(6);
+            playerUnit.Heal(8);
             playerHUD.SetHP(playerUnit.currentHP);
             
             defend = true;
@@ -380,106 +387,210 @@ public class BattleSystem : MonoBehaviour
         // Generate random number for miss hit chance
         float randomValue2 = UnityEngine.Random.value;
 
+        // Determine which attack
+        float randomValue3 = UnityEngine.Random.value;
+        int ranmdomNumber = (int)(randomValue3 * 10) + 1;
+
         // Determine whether attack is a critical hit
         bool isCriticalHit = randomValue <= enemyCriticalChance;
 
-        enemyGO.GetComponent<Animator>().SetTrigger("isBite");
+        
+        if (ranmdomNumber <= 5) {
+            enemyGO.GetComponent<Animator>().SetTrigger("isBite");
 
-        AudioSource biteSound = GetComponent<AudioSource>();
-        biteSound.clip = biteAudioClip;
-        biteSound.Play();
+            AudioSource biteSound = GetComponent<AudioSource>();
+            biteSound.clip = biteAudioClip;
+            biteSound.Play();
 
-        EnemyHit.GetComponent<Animator>().SetTrigger("isBiten");
-        yield return new WaitForSeconds(1f);
-        enemyGO.GetComponent<Animator>().SetTrigger("isSit");
-        EnemyHit.GetComponent<Animator>().SetTrigger("isNotBiten");
+            EnemyHit.GetComponent<Animator>().SetTrigger("isBiten");
+            yield return new WaitForSeconds(1f);
+            enemyGO.GetComponent<Animator>().SetTrigger("isSit");
+            EnemyHit.GetComponent<Animator>().SetTrigger("isNotBiten");
 
-        // Determine whether attack is a miss hit
-        bool isMissHit = randomValue2 <= enemyMissChance;
+            // Determine whether attack is a miss hit
+            bool isMissHit = randomValue2 <= enemyMissChance;
 
-        Debug.Log("isCriticalHit: " + isCriticalHit);
+            Debug.Log("isCriticalHit: " + isCriticalHit);
 
-        if(isMissHit ==true) {
-            
-                    dialogueText.text = "Pina missed!";
+            if(isMissHit == true) {
+                
+                        dialogueText.text = "Pina missed!";
+                        yield return new WaitForSeconds(2f);
+                        defend = false;
+
+                        state = BattleState.PLAYERTURN;
+                        PlayerTurn();
+                }else if(defend == true)
+            {
+                dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
+
+                AudioSource shieldhitSound = GetComponent<AudioSource>();
+                shieldhitSound.clip = shieldhitAudioClip;
+                shieldhitSound.Play();
+
+                yield return new WaitForSeconds(1f);
+
+                defend = false;
+
+                yield return new WaitForSeconds(1f);
+
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            } else if (isCriticalHit == true)
+            {
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = playerUnit.TakeExtraDamage(enemyUnit.bite, isCriticalHit, isMissHit);
+
+                dialogueText.text = "Critical Hit! Pina digs her fangs into you deeper!";
+
+                playerHUD.SetHP(playerUnit.currentHP);
+
+                defend = false;
+
+                yield return new WaitForSeconds(2f);
+
+                if (playerUnit.currentHP <= 0) {
+                playerGO.GetComponent<Animator>().SetTrigger("isDead");
+                yield return new WaitForSeconds(2f);
+    }
+
+                if(isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
                     yield return new WaitForSeconds(2f);
+                    SceneManager.LoadScene("Game Over");
+                }else
+                    {
+                        state = BattleState.PLAYERTURN;
+                        PlayerTurn();
+                    }
+            }else {
+
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = playerUnit.TakeDamage(enemyUnit.bite, isCriticalHit, isMissHit);
+
+                dialogueText.text = enemyUnit.unitName + " digs her fangs into you!";
+
+                playerHUD.SetHP(playerUnit.currentHP);
+
+                defend = false;
+
+                yield return new WaitForSeconds(2f);
+
+                if(isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                    yield return new WaitForSeconds(2f);
+                    SceneManager.LoadScene("Game Over");
+                }else
+                    {
+                        state = BattleState.PLAYERTURN;
+                        PlayerTurn();
+                    }
+                    }
+        }else if (ranmdomNumber >= 6){
+            enemyGO.GetComponent<Animator>().SetTrigger("isHeadbutt");
+
+            AudioSource headbuttSound = GetComponent<AudioSource>();
+            headbuttSound.clip = headbuttAudioClip;
+            headbuttSound.Play();
+
+            EnemyHit.GetComponent<Animator>().SetTrigger("isHead");
+            yield return new WaitForSeconds(1f);
+            enemyGO.GetComponent<Animator>().SetTrigger("isSit");
+            EnemyHit.GetComponent<Animator>().SetTrigger("isNotHead");
+
+            // Determine whether attack is a miss hit
+            bool isMissHit = randomValue2 <= enemyMissChance;
+
+            Debug.Log("isCriticalHit: " + isCriticalHit);
+
+            if(isMissHit == true) {
+                
+                        dialogueText.text = "Pina missed!";
+                        yield return new WaitForSeconds(2f);
+                        defend = false;
+
+                        state = BattleState.PLAYERTURN;
+                        PlayerTurn();
+                }else if(defend == true)
+            {
+                dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
+
+                AudioSource shieldhitSound = GetComponent<AudioSource>();
+                shieldhitSound.clip = shieldhitAudioClip;
+                shieldhitSound.Play();
+
+                yield return new WaitForSeconds(1f);
+
+                defend = false;
+
+                yield return new WaitForSeconds(1f);
+
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            } else if (isCriticalHit == true)
+            {
+                    yield return new WaitForSeconds(1f);
+
+                    bool isDead = playerUnit.TakeExtraDamage(enemyUnit.headbutt, isCriticalHit, isMissHit);
+
+                    dialogueText.text = "Critical Hit! Pina slams her head right into you harder!";
+
+                    playerHUD.SetHP(playerUnit.currentHP);
+
                     defend = false;
 
-                    state = BattleState.PLAYERTURN;
-                    PlayerTurn();
-            }else if(defend == true)
-        {
-            dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
+                    yield return new WaitForSeconds(2f);
 
-            AudioSource shieldhitSound = GetComponent<AudioSource>();
-            shieldhitSound.clip = shieldhitAudioClip;
-            shieldhitSound.Play();
+                    if (playerUnit.currentHP <= 0) {
+                    playerGO.GetComponent<Animator>().SetTrigger("isDead");
+                    yield return new WaitForSeconds(2f);
+                    }
 
-            yield return new WaitForSeconds(1f);
+                    if(isDead)
+                    {
+                        state = BattleState.LOST;
+                        EndBattle();
+                        yield return new WaitForSeconds(2f);
+                        SceneManager.LoadScene("Game Over");
+                    }else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn();
+                        }
+                }else {
 
-            defend = false;
+                    yield return new WaitForSeconds(1f);
 
-            yield return new WaitForSeconds(1f);
+                    bool isDead = playerUnit.TakeDamage(enemyUnit.headbutt, isCriticalHit, isMissHit);
 
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
-        } else if (isCriticalHit == true)
-        {
-            yield return new WaitForSeconds(1f);
+                    dialogueText.text = enemyUnit.unitName + " slams her head into you!";
 
-            bool isDead = playerUnit.TakeExtraDamage(enemyUnit.bite, isCriticalHit, isMissHit);
+                    playerHUD.SetHP(playerUnit.currentHP);
 
-            dialogueText.text = "Critical Hit! Pina digs her fangs into you deeper!";
+                    defend = false;
 
-            playerHUD.SetHP(playerUnit.currentHP);
+                    yield return new WaitForSeconds(2f);
 
-            defend = false;
-
-            yield return new WaitForSeconds(2f);
-
-            if (playerUnit.currentHP <= 0) {
-            playerGO.GetComponent<Animator>().SetTrigger("isDead");
-            yield return new WaitForSeconds(2f);
-}
-
-            if(isDead)
-            {
-                state = BattleState.LOST;
-                EndBattle();
-                yield return new WaitForSeconds(2f);
-                SceneManager.LoadScene("Game Over");
-            }else
-                {
-                    state = BattleState.PLAYERTURN;
-                    PlayerTurn();
-                }
-        }else {
-
-            yield return new WaitForSeconds(1f);
-
-            bool isDead = playerUnit.TakeDamage(enemyUnit.bite, isCriticalHit, isMissHit);
-
-            dialogueText.text = enemyUnit.unitName + " digs her fangs into you!";
-
-            playerHUD.SetHP(playerUnit.currentHP);
-
-            defend = false;
-
-            yield return new WaitForSeconds(2f);
-
-            if(isDead)
-            {
-                state = BattleState.LOST;
-                EndBattle();
-                yield return new WaitForSeconds(2f);
-                SceneManager.LoadScene("Game Over");
-            }else
-                {
-                    state = BattleState.PLAYERTURN;
-                    PlayerTurn();
-                }
-    }
+                    if(isDead)
+                    {
+                        state = BattleState.LOST;
+                        EndBattle();
+                        yield return new WaitForSeconds(2f);
+                        SceneManager.LoadScene("Game Over");
+                    }else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn();
+                        }
+                        }
         }
+    }
 
     void PlayerTurn()
     {
