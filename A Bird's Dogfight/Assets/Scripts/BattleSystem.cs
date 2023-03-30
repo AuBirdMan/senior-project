@@ -42,6 +42,7 @@ public class BattleSystem : MonoBehaviour
     bool playerDefendedLastTurn;
 
     bool buff;
+    bool flinch;
 
     public Button defendButton;
 
@@ -93,7 +94,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.missChance = 20;
 
         playerUnit.wingAttackAccuracy = 100;
-        playerUnit.drillPeckAccuracy = 80;
+        playerUnit.drillPeckAccuracy = 75;
 
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
         dialogueText2.text = "Critical Hit Check =";
@@ -139,6 +140,16 @@ public class BattleSystem : MonoBehaviour
 
     Debug.Log("isCriticalHit: " + isCriticalHit);
 
+    float randomValue3 = UnityEngine.Random.value;
+            int ranmdomNumberFlinch = (int)(randomValue3 * 10) + 1;
+
+            if (ranmdomNumberFlinch >= 8)
+            {
+                flinch = true;
+            } else {
+                flinch = false;
+            }
+
     playerGO.GetComponent<Animator>().SetTrigger("isWingAttack");
 
     AudioSource wingflareSound = GetComponent<AudioSource>();
@@ -158,6 +169,7 @@ public class BattleSystem : MonoBehaviour
             {
                     dialogueText.text = "You missed!";
                     Aura.SetActive(false);
+                    flinch = false;
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
                     yield return new WaitForSeconds(1f);
@@ -394,8 +406,16 @@ public class BattleSystem : MonoBehaviour
         // Determine whether attack is a critical hit
         bool isCriticalHit = randomValue <= enemyCriticalChance;
 
+        if (flinch == true) {
+                        dialogueText.text = "Pina flinched!";
+                        yield return new WaitForSeconds(2f);
+                        defend = false;
+
+                        state = BattleState.PLAYERTURN;
+                        PlayerTurn();
+        }
         
-        if (ranmdomNumber <= 5) {
+        if (ranmdomNumber <= 5 && flinch == false) {
             enemyGO.GetComponent<Animator>().SetTrigger("isBite");
 
             AudioSource biteSound = GetComponent<AudioSource>();
@@ -412,7 +432,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("isCriticalHit: " + isCriticalHit);
 
-            if(isMissHit == true) {
+            if(isMissHit == true && flinch == false) {
                 
                         dialogueText.text = "Pina missed!";
                         yield return new WaitForSeconds(2f);
@@ -436,7 +456,7 @@ public class BattleSystem : MonoBehaviour
 
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
-            } else if (isCriticalHit == true)
+            } else if (isCriticalHit == true && flinch == false)
             {
                 yield return new WaitForSeconds(1f);
 
@@ -492,7 +512,7 @@ public class BattleSystem : MonoBehaviour
                         PlayerTurn();
                     }
                     }
-        }else if (ranmdomNumber >= 6){
+        }else if (ranmdomNumber >= 6 && flinch == false){
             enemyGO.GetComponent<Animator>().SetTrigger("isHeadbutt");
 
             AudioSource headbuttSound = GetComponent<AudioSource>();
@@ -509,7 +529,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("isCriticalHit: " + isCriticalHit);
 
-            if(isMissHit == true) {
+            if(isMissHit == true && flinch == false) {
                 
                         dialogueText.text = "Pina missed!";
                         yield return new WaitForSeconds(2f);
@@ -533,7 +553,7 @@ public class BattleSystem : MonoBehaviour
 
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
-            } else if (isCriticalHit == true)
+            } else if (isCriticalHit == true && flinch == false)
             {
                     yield return new WaitForSeconds(1f);
 
@@ -563,7 +583,7 @@ public class BattleSystem : MonoBehaviour
                             state = BattleState.PLAYERTURN;
                             PlayerTurn();
                         }
-                }else {
+                }else if (flinch == false) {
 
                     yield return new WaitForSeconds(1f);
 
