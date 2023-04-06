@@ -143,7 +143,7 @@ public class BattleSystem : MonoBehaviour
     float randomValue3 = UnityEngine.Random.value;
             int ranmdomNumberFlinch = (int)(randomValue3 * 10) + 1;
 
-            if (ranmdomNumberFlinch >= 8)
+            if (ranmdomNumberFlinch >= 7)
             {
                 flinch = true;
             } else {
@@ -230,6 +230,7 @@ public class BattleSystem : MonoBehaviour
     {
         CombatButtons.SetActive(false);
         playerDefendedLastTurn = false;
+        flinch = false;
         
         Debug.Log("Player critical chance: " + playerUnit.criticalChance);
 
@@ -322,6 +323,7 @@ public class BattleSystem : MonoBehaviour
         {
             CombatButtons.SetActive(false);
             Shield.SetActive(true);
+            flinch = false;
             
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogueText.text = "You defend and heal up!";
@@ -352,6 +354,7 @@ public class BattleSystem : MonoBehaviour
     {
         CombatButtons.SetActive(false);
         Aura.SetActive(true);
+        flinch = false;
 
         AudioSource powerupSound = GetComponent<AudioSource>();
         powerupSound.clip = powerupAudioClip;
