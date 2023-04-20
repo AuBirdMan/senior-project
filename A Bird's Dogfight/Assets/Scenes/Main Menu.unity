@@ -1777,11 +1777,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Aster is a determined and brave bird whose one goal in life is to take
-    revenge for his parents who were\r                                                       
-    killed by Dugo, a hyperactive and aggressive dog. Aster now finds himself in
-    a life-and-death battle with\r      Dugo. Will he successfully enact revenge
-    or will he be joining his parents?\r\n"
+  m_text: "Almond is a determined and brave bird whose one goal in life is to take
+    revenge for his parents who were\r      killed by Pina, a hyperactive and aggressive
+    dog. Almond now finds himself in a life-and-death battle with\r              
+    Pina. Will he successfully enact revenge or will he be joining his parents?\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf139139c48b6c843b492603bc81e319, type: 2}
   m_sharedMaterial: {fileID: 218087816474138153, guid: cf139139c48b6c843b492603bc81e319, type: 2}
@@ -2263,7 +2262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Low damage but 100% accurate + 40% chance to flinch the enemy.
+  m_text: High damage but 80% accurate + 35% chance to flinch the enemy.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf139139c48b6c843b492603bc81e319, type: 2}
   m_sharedMaterial: {fileID: 218087816474138153, guid: cf139139c48b6c843b492603bc81e319, type: 2}
@@ -3183,7 +3182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: High damage but 75% accurate.
+  m_text: Low damage but 100% accurate and can pierce barriers.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf139139c48b6c843b492603bc81e319, type: 2}
   m_sharedMaterial: {fileID: 218087816474138153, guid: cf139139c48b6c843b492603bc81e319, type: 2}

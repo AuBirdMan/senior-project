@@ -17,6 +17,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject PlayerArrow;
     public GameObject EnemyArrow;
     public GameObject Shield;
+    public GameObject EnemyShield;
     public GameObject Aura;
 
     public Transform playerBattleStation;
@@ -39,6 +40,7 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
     bool defend;
+    bool enemydefend;
     bool playerDefendedLastTurn;
 
     bool buff;
@@ -91,10 +93,10 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.criticalChance = 20;
 
         //playerUnit.missChance = 20;
-        enemyUnit.missChance = 20;
+        enemyUnit.missChance = 13;
 
-        playerUnit.wingAttackAccuracy = 100;
-        playerUnit.drillPeckAccuracy = 75;
+        playerUnit.wingAttackAccuracy = 80;
+        playerUnit.drillPeckAccuracy = 100;
 
         dialogueText.text = "A dogfight has begun!"; //enemyUnit.unitName
         dialogueText2.text = "Critical Hit Check =";
@@ -107,6 +109,7 @@ public class BattleSystem : MonoBehaviour
         EnemyArrow.SetActive(false);
 
         defend = false;
+        enemydefend = false;
         playerDefendedLastTurn = false;
         buff = false;
 
@@ -143,7 +146,7 @@ public class BattleSystem : MonoBehaviour
     float randomValue3 = UnityEngine.Random.value;
             int ranmdomNumberFlinch = (int)(randomValue3 * 10) + 1;
 
-            if (ranmdomNumberFlinch >= 7)
+            if (ranmdomNumberFlinch >= 7.5)
             {
                 flinch = true;
             } else {
@@ -163,19 +166,34 @@ public class BattleSystem : MonoBehaviour
     PlayerHit.GetComponent<Animator>().SetTrigger("isNotWing");
 
     // Determine whether attack is a miss hit
-    bool isMissHit = randomValue2 <= (100 - playerUnit.wingAttackAccuracy);
-
-        if(isMissHit ==true) {
+    bool isMissHit = randomValue2 <= (100 - playerUnit.wingAttackAccuracy)/ 100f;
+    Debug.Log("Miss: " + randomValue2);
+        if(isMissHit == true) {
             {
                     dialogueText.text = "You missed!";
                     Aura.SetActive(false);
+                    buff = false;
                     flinch = false;
                     state = BattleState.ENEMYTURN;
                     enemyHUD.SetHP(enemyUnit.currentHP);
                     yield return new WaitForSeconds(1f);
                     StartCoroutine(EnemyTurn());
             }
-        }else if(buff == true || isCriticalHit == true)
+        }else if(enemydefend == true)
+            {
+                dialogueText.text = "Couldn't get through Pina's barrier!";
+                AudioSource shieldhitSound = GetComponent<AudioSource>();
+                shieldhitSound.clip = shieldhitAudioClip;
+                shieldhitSound.Play();
+                Aura.SetActive(false);
+                buff = false;
+                flinch = false;
+                yield return new WaitForSeconds(1f);
+                state = BattleState.ENEMYTURN;
+                enemyHUD.SetHP(enemyUnit.currentHP);
+                yield return new WaitForSeconds(2f);
+                StartCoroutine(EnemyTurn());
+            }else if(buff == true || isCriticalHit == true)
         {
             dialogueText.text = isCriticalHit ? "Critical hit! Your wings smash right into the enemy!" :  "Your strengthened wings smash right into the enemy!";
             
@@ -271,12 +289,21 @@ public class BattleSystem : MonoBehaviour
             }else if(buff == true || isCriticalHit == true)
             {
                 dialogueText.text = isCriticalHit ? "Critical hit! Your beak drills into enemy!" :  "Your sharpened beak drills into enemy!";
-                
+
                 bool isDead = enemyUnit.TakeExtraDamage(playerUnit.drillpeck, isCriticalHit, isMissHit);
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
                 Aura.SetActive(false);
                 buff = false;
+
+                if (enemydefend ==true) {
+                     
+                     yield return new WaitForSeconds(1f);
+                     dialogueText.text = "You pierced Pina's barrier!";
+                }
+
+                EnemyShield.SetActive(false);
+                enemydefend = false;
                 yield return new WaitForSeconds(1f);
 
                 if(isDead)
@@ -296,6 +323,15 @@ public class BattleSystem : MonoBehaviour
             } else {
                 dialogueText.text = "Your beak drills into enemy!";
                 bool isDead = enemyUnit.TakeDamage(playerUnit.drillpeck, isCriticalHit, isMissHit);
+                
+                 if (enemydefend ==true) {
+                     
+                     yield return new WaitForSeconds(1f);
+                     dialogueText.text = "You pierced Pina's barrier!";
+                }
+
+                EnemyShield.SetActive(false);
+                enemydefend = false;
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
                 yield return new WaitForSeconds(1f);
@@ -418,7 +454,7 @@ public class BattleSystem : MonoBehaviour
                         PlayerTurn();
         }
         
-        if (ranmdomNumber <= 5 && flinch == false) {
+        if (ranmdomNumber <= 4 && flinch == false) {
             enemyGO.GetComponent<Animator>().SetTrigger("isBite");
 
             AudioSource biteSound = GetComponent<AudioSource>();
@@ -435,7 +471,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("isCriticalHit: " + isCriticalHit);
 
-            if(isMissHit == true && flinch == false) {
+            if(ranmdomNumber <= 4 && isMissHit == true && flinch == false) {
                 
                         dialogueText.text = "Pina missed!";
                         yield return new WaitForSeconds(2f);
@@ -459,7 +495,7 @@ public class BattleSystem : MonoBehaviour
 
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
-            } else if (isCriticalHit == true && flinch == false)
+            } else if (ranmdomNumber <=4 && isCriticalHit == true && flinch == false)
             {
                 yield return new WaitForSeconds(1f);
 
@@ -489,7 +525,7 @@ public class BattleSystem : MonoBehaviour
                         state = BattleState.PLAYERTURN;
                         PlayerTurn();
                     }
-            }else {
+            }else if (ranmdomNumber <= 4 && flinch == false) {
 
                 yield return new WaitForSeconds(1f);
 
@@ -515,7 +551,7 @@ public class BattleSystem : MonoBehaviour
                         PlayerTurn();
                     }
                     }
-        }else if (ranmdomNumber >= 6 && flinch == false){
+        }else if (ranmdomNumber >= 5 && ranmdomNumber <= 7 && flinch == false){
             enemyGO.GetComponent<Animator>().SetTrigger("isHeadbutt");
 
             AudioSource headbuttSound = GetComponent<AudioSource>();
@@ -532,7 +568,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("isCriticalHit: " + isCriticalHit);
 
-            if(isMissHit == true && flinch == false) {
+            if(ranmdomNumber >= 5 && ranmdomNumber <= 7 && isMissHit == true && flinch == false) {
                 
                         dialogueText.text = "Pina missed!";
                         yield return new WaitForSeconds(2f);
@@ -540,7 +576,7 @@ public class BattleSystem : MonoBehaviour
 
                         state = BattleState.PLAYERTURN;
                         PlayerTurn();
-                }else if(defend == true)
+                }else if(ranmdomNumber >= 5 && ranmdomNumber <= 7 && defend == true)
             {
                 dialogueText.text = enemyUnit.unitName + " couldn't get through your barrier!";
 
@@ -556,7 +592,7 @@ public class BattleSystem : MonoBehaviour
 
                 state = BattleState.PLAYERTURN;
                 PlayerTurn();
-            } else if (isCriticalHit == true && flinch == false)
+            } else if (ranmdomNumber >= 5 && ranmdomNumber <= 7 && isCriticalHit == true && flinch == false)
             {
                     yield return new WaitForSeconds(1f);
 
@@ -586,7 +622,7 @@ public class BattleSystem : MonoBehaviour
                             state = BattleState.PLAYERTURN;
                             PlayerTurn();
                         }
-                }else if (flinch == false) {
+                }else if (ranmdomNumber >= 5 && ranmdomNumber <= 7 && flinch == false) {
 
                     yield return new WaitForSeconds(1f);
 
@@ -611,8 +647,42 @@ public class BattleSystem : MonoBehaviour
                             state = BattleState.PLAYERTURN;
                             PlayerTurn();
                         }
+                        } 
+        }if (ranmdomNumber >= 8 && flinch == false && enemydefend == true){
+                            
+                            dialogueText.text = enemyUnit.unitName + " laughs behind her barrier and heals more!";
+                            defend = false;
+
+                            enemyUnit.Heal(5);
+                            enemyHUD.SetHP(enemyUnit.currentHP);
+                            yield return new WaitForSeconds(2f);
+
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn();
+                        }else if (ranmdomNumber >= 8 && flinch == false && enemydefend == false)
+                        {
+                            Debug.Log("Defend!");
+                            defend = false;
+                            EnemyShield.SetActive(true);
+                            enemydefend = true;
+
+                            enemyUnit.Heal(3);
+                            enemyHUD.SetHP(enemyUnit.currentHP);
+
+                            dialogueText.text = enemyUnit.unitName + " puts up a barrier!";
+
+                            AudioSource barrierSound = GetComponent<AudioSource>();
+                            barrierSound.clip = barrierAudioClip;
+                            barrierSound.Play();
+
+                            yield return new WaitForSeconds(2f);
+                            dialogueText.text = enemyUnit.unitName + " laughs behind her barrier!";
+
+                            yield return new WaitForSeconds(2f);
+
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn();
                         }
-        }
     }
 
     void PlayerTurn()

@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Aster
-  wingattack: 5
-  drillpeck: 10
+  wingattack: 10
+  drillpeck: 5
   bite: 0
   headbutt: 0
   maxHP: 80
