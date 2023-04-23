@@ -8,6 +8,8 @@ public class PanelCloser : MonoBehaviour
     public GameObject options;
     public GameObject instructions;
     public GameObject credits;
+    public GameObject almond;
+    public GameObject pina;
 
     public void CloseStoryPanel()
     {
@@ -27,5 +29,15 @@ public class PanelCloser : MonoBehaviour
     public void CloseCreditsPanel()
     {
         credits.SetActive(false);
+    }
+
+    public void CloseAlmondPanel()
+    {
+        almond.SetActive(false);
+    }
+
+    public void ClosePinaPanel()
+    {
+        pina.SetActive(false);
     }
 }

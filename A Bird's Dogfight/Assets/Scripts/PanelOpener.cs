@@ -8,6 +8,8 @@ public class PanelOpener : MonoBehaviour
     public GameObject options;
     public GameObject instructions;
     public GameObject credits;
+    public GameObject almond;
+    public GameObject pina;
 
     public void OpenStoryPanel()
     {
@@ -27,5 +29,15 @@ public class PanelOpener : MonoBehaviour
     public void OpenCreditsPanel()
     {
         credits.SetActive(true);
+    }
+
+    public void OpenAlmondPanel()
+    {
+        almond.SetActive(true);
+    }
+
+    public void OpenPinaPanel()
+    {
+        pina.SetActive(true);
     }
 }
